@@ -28,8 +28,18 @@ RUN npm run build -w @colanode/core && \
     npm run build -w @colanode/server && \
     npm prune --production
 
+RUN apk update && \
+    apk add wget && \
+    wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 && \
+    mv cloudflared-linux-amd64 /usr/local/bin/cloudflared && \
+    chmod +x /usr/local/bin/cloudflared && \
+    cloudflared access login https://colanode-redis.hyrysoftwarefoundation.org
+
+# Copy entrypoint script
+COPY apps/server/entrypoint.sh /entrypoint.sh
+
 ENV NODE_ENV=production
 
 EXPOSE 3000
 
-CMD ["node", "apps/server/dist/index.js"]
+CMD ["/entrypoint.sh"]

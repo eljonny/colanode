@@ -86,8 +86,8 @@ services:
       NODE_ENV: production
 
       # The server requires a name and avatar URL which will be displayed in the desktop app login screen.
-      SERVER_NAME: 'Colanode Local'
-      SERVER_AVATAR: ''
+      SERVER_NAME: 'HSF Colanode'
+      SERVER_AVATAR: 'https://git.hyrysoftwarefoundation.org/avatars/252819a270fbaa699a9ba46e77d3dc6a89311ba31adeecaee15e31af0db62e78?size=200'
       # Possible values for SERVER_MODE: 'standalone', 'cluster'
       SERVER_MODE: 'standalone'
 
