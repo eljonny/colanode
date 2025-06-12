@@ -1,5 +1,8 @@
 {
-	"Version": "2025-06-11",
+	"Version": "2012-10-17",
+    "Id": "ColanodeFilesPolicyv1",
+    "Name": "Colanode Files Service Account Policy",
+    "Description": "Describes the allowed actions and resources for the Colanode Files MinIO S3 User Service Account.",
 	"Statement": [
 		{
 			"Effect": "Allow",
