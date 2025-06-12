@@ -1,0 +1,13 @@
+{
+	"Version": "2025-06-11",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"s3:GetObject",
+				"s3:PutObject"
+			],
+			"Resource": "arn:aws:s3:::colanode-avatars/*"
+		}
+	]
+}
