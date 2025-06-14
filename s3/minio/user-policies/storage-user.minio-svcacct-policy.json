@@ -1,0 +1,17 @@
+{
+	"Version": "2012-10-17",
+	"Id": "ColanodeStoragePolicyv1",
+	"Name": "Colanode Storage Service Account Policy",
+	"Description": "Describes the allowed actions and resources for the Colanode Storage MinIO S3 User Service Account.",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"s3:GetObject",
+				"s3:PutObject",
+				"s3:DeleteObject"
+			],
+			"Resource": "arn:aws:s3:::colanode-storage/*"
+		}
+	]
+}
