@@ -5,6 +5,7 @@ import { config } from '@colanode/server/lib/config';
 export const s3Client = new S3Client({
   endpoint: config.storage.endpoint,
   region: config.storage.region,
+  forcePathStyle: config.storage.forcePathStyle,
   credentials: {
     accessKeyId: config.storage.accessKey,
     secretAccessKey: config.storage.secretKey,
