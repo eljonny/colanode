@@ -9,7 +9,7 @@ import {
 } from 'electron';
 
 import started from 'electron-squirrel-startup';
-import { updateElectronApp, UpdateSourceType } from 'update-electron-app';
+// import { updateElectronApp, UpdateSourceType } from 'update-electron-app';
 
 import { eventBus } from '@colanode/client/lib';
 import { MutationInput, MutationMap } from '@colanode/client/mutations';
@@ -37,15 +37,15 @@ if (started) {
   electronApp.quit();
 }
 
-updateElectronApp({
-  updateSource: {
-    type: UpdateSourceType.ElectronPublicUpdateService,
-    repo: 'colanode/colanode',
-    host: 'https://update.electronjs.org',
-  },
-  updateInterval: '10 minutes',
-  notifyUser: true,
-});
+// updateElectronApp({
+//   updateSource: {
+//     type: UpdateSourceType.ElectronPublicUpdateService,
+//     repo: 'colanode/colanode',
+//     host: 'https://update.electronjs.org',
+//   },
+//   updateInterval: '10 minutes',
+//   notifyUser: true,
+// });
 
 const createWindow = async () => {
   await app.migrate();
