@@ -1,3 +1,4 @@
+import fsSync from 'fs';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -147,34 +148,52 @@ const config: ForgeConfig = {
       const srcNodeModules = '../../node_modules';
       const destNodeModules = './node_modules';
 
-      // First clear the node_modules directory
-      await fs.rm(destNodeModules, {
-        recursive: true,
-        force: true,
-        maxRetries: 3,
-        retryDelay: 1000,
-      });
-
-      // Ensure the destination directory exists
-      await fs.mkdir(destNodeModules, { recursive: true });
-
-      // Copy the entire node_modules directory recursively
-      await fs.cp(srcNodeModules, destNodeModules, {
-        recursive: true,
-        force: true,
-      });
-    },
-    postPackage: async () => {
-      // Remove the node_modules directory
-      try {
-        await fs.rm('./node_modules', {
+      if (process.env.COLANODE_PRE_PACK_CLEAN_NODE_MODULES === 'true') {
+        await fs.rm(destNodeModules, {
           recursive: true,
           force: true,
           maxRetries: 3,
           retryDelay: 1000,
         });
-      } catch (error) {
-        console.error(error);
+      }
+
+      try {
+        await fs.mkdir(destNodeModules, { recursive: true });
+      }
+      catch (error) {
+        console.warn('Could not create node_modules directory:', error);
+      }
+
+      await fs.cp(srcNodeModules, destNodeModules, {
+        preserveTimestamps: true,
+        recursive: true,
+        force: true,
+        filter: (src, dest) => {
+          return !(
+            // Skip copying files that already exist and have the same mtime and size,
+            // if COLANODE_PRE_PACK_CLEAN_NODE_MODULES is not set to true and it was
+            // previously also run with COLANODE_POST_PACK_CLEAN_NODE_MODULES unset or set
+            // to something other than true, so we can hopefully not have to re-copy the
+            // entire node_modules directory tree every time we run dev or package.
+            fsSync.existsSync(dest) &&
+            fsSync.statSync(src).mtime.getTime() === fsSync.statSync(dest).mtime.getTime() &&
+            fsSync.statSync(src).size === fsSync.statSync(dest).size
+          );
+        }
+      });
+    },
+    postPackage: async () => {
+      if (process.env.COLANODE_POST_PACK_CLEAN_NODE_MODULES === 'true') {
+        try {
+          await fs.rm('./node_modules', {
+            recursive: true,
+            force: true,
+            maxRetries: 3,
+            retryDelay: 1000,
+          });
+        } catch (error) {
+          console.error(error);
+        }
       }
     },
     packageAfterPrune: async (_, buildPath) => {
