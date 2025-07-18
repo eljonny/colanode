@@ -10,5 +10,4 @@ export const s3Client = new S3Client({
     accessKeyId: config.storage.accessKey,
     secretAccessKey: config.storage.secretKey,
   },
-  forcePathStyle: config.storage.forcePathStyle,
 });
