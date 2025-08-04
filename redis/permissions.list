@@ -1,0 +1,9 @@
+# Key Permissions
+GetKey
+SetKey
+DeleteKey
+IncrementKey
+ExpireKey
+# Event Permissions
+SubscribeToChannel
+PublishEvent
