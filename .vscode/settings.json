@@ -13,5 +13,8 @@
     "githubPullRequests.experimental.chat": false,
     "githubPullRequests.pullBranch": "always",
     "githubPullRequests.quickDiff": true,
-    "githubPullRequests.showPullRequestNumberInTree": true
+    "githubPullRequests.showPullRequestNumberInTree": true,
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "hsf-main"
+    ]
 }
