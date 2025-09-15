@@ -1,0 +1,17 @@
+{
+    "githubPullRequests.createDefaultBaseBranch": "createdFromBranch",
+    "githubPullRequests.overrideDefaultBranch": "base-upstream/main",
+    "githubPullRequests.remotes": [
+        "upstream",
+        "base-upstream"
+    ],
+    "githubIssues.alwaysPromptForNewIssueRepo": true,
+    "githubPullRequests.codingAgent.autoCommitAndPush": false,
+    "githubPullRequests.codingAgent.enabled": false,
+    "githubPullRequests.codingAgent.promptForConfirmation": false,
+    "githubPullRequests.codingAgent.uiIntegration": false,
+    "githubPullRequests.experimental.chat": false,
+    "githubPullRequests.pullBranch": "always",
+    "githubPullRequests.quickDiff": true,
+    "githubPullRequests.showPullRequestNumberInTree": true
+}
