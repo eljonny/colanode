@@ -1,11 +1,11 @@
 [Unit]
-Description=Cloudflare Daemon Tunnel service for HSF Colanode + HSF Colanode Web
+Description=Cloudflare Daemon Tunnel service for HSF Colanode and HSF Colanode Web
 After=network.target,docker.service
 
 [Service]
 EnvironmentFile=/opt/cloudflared/env/colanode/cft.env
-ExecStart=/usr/bin/cloudflared tunnel run --token $CFT_TOKEN 
-RestartSec=300s
+ExecStart=/usr/bin/cloudflared tunnel run --token $CFT_TOKEN $CFT_ID
+RestartSec=30s
 User=nobody
 CapabilityBoundingSet=CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_BIND_SERVICE
